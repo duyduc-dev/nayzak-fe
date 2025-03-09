@@ -86,7 +86,7 @@ defineExpose({ setVisible });
         <div class="text-[14px] font-semibold">English</div>
       </div>
       <div class="my-4 h-[1px] w-full bg-gray-200" />
-      <AppButton>{{ t("signIn") }}</AppButton>
+      <AppButton full-width>{{ t("signIn") }}</AppButton>
     </div>
   </app-drawer-right>
 </template>

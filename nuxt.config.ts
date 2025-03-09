@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   alias: {
     "@": fileURLToPath(new URL("./", import.meta.url)), // Alias for src/
   },
@@ -36,6 +36,8 @@ export default defineNuxtConfig({
     families: {
       Roboto: true,
       Poppins: true,
+      Inter: true,
+      SpaceGrotesk: true,
     },
   },
   i18n: {

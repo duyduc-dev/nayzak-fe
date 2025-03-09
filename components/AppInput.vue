@@ -3,15 +3,28 @@ type Props = {
   id?: string;
   inputClass?: string;
   containerClass?: string;
+  containerInputClass?: string;
   label?: string;
   rightComponent?: Component;
   rightComponentProps?: Record<string, any>;
   leftComponent?: Component;
+  leftLabel?: string;
   leftComponentProps?: Record<string, any>;
   placeholder?: string;
 };
 
-const { id, inputClass, containerClass, label } = defineProps<Props>();
+const {
+  id,
+  inputClass,
+  containerClass,
+  label,
+  containerInputClass,
+  rightComponent,
+  rightComponentProps,
+  placeholder,
+  leftComponent,
+  leftComponentProps,
+} = defineProps<Props>();
 
 const innerId = useId();
 
@@ -22,7 +35,12 @@ const componentId = id || innerId;
   <div :class="containerClass">
     <label v-if="label" :for="componentId">{{ label }}</label>
     <div
-      class="flex items-center gap-2 rounded-[6px] border border-gray-300 px-4 py-3"
+      :class="
+        cn(
+          'flex items-center gap-2 rounded-[6px] border border-gray-300 px-4 py-3',
+          containerInputClass,
+        )
+      "
     >
       <component
         :is="rightComponent"
@@ -39,6 +57,9 @@ const componentId = id || innerId;
         v-if="leftComponent"
         v-bind="leftComponentProps"
       />
+      <span v-else-if="leftLabel" class="text-[14px] font-bold">
+        {{ leftLabel }}
+      </span>
     </div>
   </div>
 </template>

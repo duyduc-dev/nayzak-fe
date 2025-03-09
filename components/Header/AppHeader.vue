@@ -7,6 +7,8 @@ import LucideShoppingCartIcon from "@/components/icons/LucideShoppingCartIcon.vu
 import LucideUserIcon from "@/components/icons/LucideUserIcon.vue";
 
 const cartItem = ref(99);
+const isHeaderScrolling = ref(false);
+
 const navigateDrawer =
   useTemplateRef<InstanceType<typeof AppNavigateDrawer>>("navigate-drawer");
 
@@ -17,10 +19,28 @@ const setOpenDrawer = (bool: boolean) => {
     navigateDrawer.value.setVisible(bool);
   }
 };
+
+const handleScroll = () => {
+  isHeaderScrolling.value = (window.top?.scrollY ?? 0) > 20;
+};
+
+onMounted(() => {
+  handleScroll();
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll, true);
+});
 </script>
 
 <template>
-  <header class="fixed top-0 right-0 left-0 z-[9999999999] h-[64px]">
+  <header
+    class="fixed top-0 right-0 left-0 z-[9999999999] h-[64px] transition-all"
+    :class="{
+      'bg-white shadow-[rgba(149,157,165,0.2)0px_8px_24px]': isHeaderScrolling,
+    }"
+  >
     <app-container class="h-full">
       <div class="flex h-full items-center justify-between py-1">
         <NuxtLink to="/" class="block h-full">
